@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+
+.message:hover {
+    transform: scale(1.03);
+}
+.nb-theme-default nb-chat.ng-star-inserted {
+    height: 28.5rem !important;
+}
+.chatButton {
+    float: right;
+    position: fixed;
+    bottom: 9%;
+    right: 28px;
+    width: 41px;
+	cursor: pointer;
+	font-size: 43px;
+    color: #007EAF;
+}
+.nb-theme-default p{
+	font-size:13px !important;
+}
+.nb-theme-default nb-chat-message nb-chat-message-text .sender {
+    font-size: 10px !important;
+}
+nb-chat .header {
+    background-color: #007EAF;
+    color: #fff !important;
+	font-weight: 100 !important;
+}
+.nb-theme-default nb-chat-message.not-reply nb-chat-message-text .text {
+    background: #007EAF !important;
+}
+.nb-theme-default [nbButton].appearance-filled.status-primary {
+    background-color: #007EAF !important;
+	border-color: #007EAF !important;
+}
+
+
+.box {
+    background-color: #FFCC55;
+    max-height: 0px;
+    overflow-y: hidden;
+    transition: ease-in-out 400ms max-height;
+}
+
+.box.opened {
+    max-height: 500px;
+    transition: ease-in-out 600ms max-height;
+}
+.chatButton:focus i {
+  animation: rotate 1s ease-in-out 0s;
+}
+.nb-theme-default [nbInput].shape-rectangle {
+    margin-right: 2%;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
+	padding: 0px !important;
+}

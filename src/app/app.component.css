@@ -1,0 +1,11 @@
+::ng-deep nb-layout-column {
+      float:right;
+}
+nb-chat {
+	width: 340px;
+	float:right;
+	position: fixed;
+    bottom: 16%;
+    right: 3%;
+}
+	
