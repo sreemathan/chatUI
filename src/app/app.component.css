@@ -7,5 +7,6 @@ nb-chat {
 	position: fixed;
     bottom: 16%;
     right: 3%;
+	border-radius: 20px;
 }
 	
