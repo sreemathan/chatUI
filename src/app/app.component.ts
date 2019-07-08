@@ -8,18 +8,21 @@ import { ChatShowcaseService } from './chat-showcase.service';
   styleUrls: ['./app.component.css'],
   
 })
+
 export class AppComponent {
   
   messages: any[];
   public show:boolean = true;
-  toggle() {
-  this.show = !this.show;
-  }
   
-	constructor(protected chatShowcaseService: ChatShowcaseService) {
+  
+  
+  
+  
+  constructor(protected chatShowcaseService: ChatShowcaseService) {
     this.messages = this.chatShowcaseService.loadMessages();
 	console.log(this.messages);
   }
+  
   
   sendMessage(event: any) {
     const files = !event.files ? [] : event.files.map((file) => {
@@ -41,10 +44,24 @@ export class AppComponent {
         avatar: 'https://cresscap.com/wp-content/uploads/bfi_thumb/dummy-profile-pic-353fq072wibz1xp0b9j75s.png',
       },
     });
+	if(event.message == "hello" || event.message == "hi"){
+	setTimeout(()=>{    
+      this.messages.push({
+		  text: "How can i assist you?",
+		  date: new Date(),
+		  reply: false,
+		  type: files.length ? 'file' : 'text',
+		  files: files,
+		  user: {
+			name: 'Altran Assist'
+		  },
+		});
+	}, 1000);
+	
+		
+	}
 	console.log(this.messages);
     
   }
-  
-	
-  
 }
+
