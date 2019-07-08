@@ -28,6 +28,11 @@ nb-chat .header {
 	font-weight: 100 !important;
 }
 .nb-theme-default nb-chat-message.not-reply nb-chat-message-text .text {
+    background: #f7f9fc !important;
+	color: black !important;
+}
+.nb-theme-default nb-chat-message.reply nb-chat-message-text .text {
+    color: white !important;
     background: #007EAF !important;
 }
 .nb-theme-default [nbButton].appearance-filled.status-primary {
@@ -35,7 +40,9 @@ nb-chat .header {
 	border-color: #007EAF !important;
 }
 
-
+.hided {
+    display: none;
+}
 .box {
     background-color: #FFCC55;
     max-height: 0px;
@@ -61,4 +68,20 @@ nb-chat .header {
 
 .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
 	padding: 0px !important;
+}
+.nb-theme-default nb-chat-message .avatar {
+    display: none;
+}
+.nb-theme-default nb-chat-message{
+	margin-bottom:11px !important;
+}
+.nb-theme-default nb-chat-message p {
+    margin: 0px;
+}
+.voiceIcon i {
+    position: fixed;
+    bottom: 20%;
+    right: 9.50%;
+    font-size: 19px;
+    color: #007EAF;
 }
