@@ -2,11 +2,13 @@
       float:right;
 }
 nb-chat {
-	width: 340px;
+	width: 360px;
 	float:right;
 	position: fixed;
     bottom: 16%;
     right: 3%;
 	border-radius: 20px;
+	height: 71% !important;
 }
+
 	
