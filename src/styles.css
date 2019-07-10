@@ -89,11 +89,14 @@ nb-icon.toggleIcon svg {
 nb-icon.toggleIcon i {
     display: none !important;
 }
+.chatloader{
+	display:none;
+}
+.dropped-files .ng-star-inserted:nth-child(even) {
+    display: none;
+}
 .chatloader img {
     width: 45px;
-}
-.chatloader {
-    text-align: center;
 }
 .voiceIcon i {
     position: fixed;

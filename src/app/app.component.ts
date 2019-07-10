@@ -44,7 +44,7 @@ export class AppComponent {
 
     
   sendMessage(event: any) {
-	  
+	$('.chatloader').show();
 	const files = !event.files ? [] : event.files.map((file) => {
       return {
         url: file.src,
@@ -64,19 +64,21 @@ export class AppComponent {
         avatar: 'https://cresscap.com/wp-content/uploads/bfi_thumb/dummy-profile-pic-353fq072wibz1xp0b9j75s.png',
       },
     });
-	if(event.message == "hello" || event.message == "hi"){
+	
+	if(event.message == "hello" || event.message == "hi" || event.message == "" ){
 	setTimeout(()=>{    
-      this.messages.push({
+      $('.chatloader').hide();
+	  this.messages.push({
 		  text: "How can i assist you?",
 		  date: new Date(),
 		  reply: false,
-		  type: files.length ? 'file' : 'text',
+		  type: 'text',
 		  files: files,
 		  user: {
 			name: 'Altran Assist'
 		  },
 		});
-	}, 1000);
+	}, 2000);
 	
 		
 	}
