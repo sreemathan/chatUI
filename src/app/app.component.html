@@ -5,8 +5,7 @@
   </nb-layout-header>
 
   <nb-layout-column>
-
-    <nb-chat title="Altran Chat UI" size="large" class="box" [class.opened]="!show">
+    <nb-chat title="Altran Chat UI" size="large" class="box" [class.opened]="!show" id="draggable">
       <nb-chat-message *ngFor="let msg of messages"
                        [type]="msg.type"
                        [message]="msg.text"
@@ -27,7 +26,27 @@
 	
 	<div class="voiceIcon pull-right"  *ngIf="showContent"><i class="fa fa-microphone" aria-hidden="true"></i></div>
 	<div class="chatButton" (click)="show = !show"><i [ngClass]="!show ? 'fa fa-times animated flipInX' : 'fa fa-comments animated flipInY'" aria-hidden="true"></i></div>
+	
+	<!-- theme/fesm2015/index.js = action button referred -->
+	
+	<div class="modal fade" id="openMedia">
+	  <div class="modal-dialog">
+		<div class="modal-content">
 
+		  <!-- Modal Header -->
+		  <div class="modal-header">
+			<h4 class="modal-title">Altran Assist</h4>
+			<!-- <button type="button" class="close" (click)="hideModal()">&times;</button> -->
+		  </div>
+
+		  <!-- Modal body -->
+		  <div class="modal-body">
+			
+		  </div>
+
+		</div>
+	  </div>
+	</div>
     <router-outlet></router-outlet>
     
   </nb-layout-column>

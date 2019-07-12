@@ -80,7 +80,7 @@ nb-chat .header {
 .nb-theme-default nb-chat-message p {
     margin: 0px;
 }
-nb-icon svg {
+button nb-icon svg {
 	display:none !important;
 }
 nb-icon.toggleIcon svg {
@@ -104,4 +104,18 @@ nb-icon.toggleIcon i {
     right: 9.50%;
     font-size: 19px;
     color: #007EAF;
+}
+.modal-dialog {
+	max-width:50%;
+}
+.modal-header{
+background-color: #007EAF;
+    
+}
+.modal-title{
+    font-size: .9375rem !important;
+	color: #fff !important;
+}
+.modal-content {
+    border-radius: 8px;
 }
