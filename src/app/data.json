@@ -1,0 +1,109 @@
+[
+  {
+    "quest": "ex",
+    "text": "duis amet sunt qui dolor quis eiusmod et",
+    "file": [
+      {
+        "url": "www.africau.edu/images/default/sample.pdf",
+        "icon": "file-text-outline"
+      },
+      {
+        "url": "https://picsum.photos/320/240/?image=387",
+        "type": "image/jpeg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=3HD540aKhzs",
+        "type": "video/mp4"
+      }
+    ]
+  },
+  {
+    "quest": "aliqua",
+    "text": "nostrud et anim aute aliqua cillum minim mollit",
+    "file": [
+      {
+        "url": "www.africau.edu/images/default/sample.pdf",
+        "icon": "file-text-outline"
+      },
+      {
+        "url": "https://picsum.photos/320/240/?image=387",
+        "type": "image/jpeg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=3HD540aKhzs",
+        "type": "video/mp4"
+      }
+    ]
+  },
+  {
+    "quest": "",
+	"type": "text",
+    "text": "This is a chatbot POC",
+    "file": []
+  },
+  {
+    "quest": "hi",
+	"type": "text",
+    "text": "This is a chatbot POC",
+    "file": []
+  },
+  {
+    "quest": "hello",
+	"type": "text",
+    "text": "This is a chatbot POC",
+    "file": []
+  },
+  {
+    "quest": "about",
+	"type": "text",
+    "text": "This is a chatbot POC",
+    "file": []
+  },
+  {
+    "quest": "what",
+	"type": "text",
+    "text": "This is a chatbot POC",
+    "file": []
+  },
+  {
+    "quest": "what is this about",
+	"type": "text",
+    "text": "This is a chatbot POC",
+    "file": []
+  },
+  {
+    "quest": "video",
+	"type": "file",
+    "text": "This is a sample video",
+    "file": [
+      {
+        "url": "http://10.203.208.133:4200/assets/images/sample.mp4",
+		"icon": "film-outline",
+        "type": "video/mp4"
+      }
+    ]
+  },
+  {
+    "quest": "pdf",
+	"type": "file",
+    "text": "This is a sample pdf",
+    "file": [
+      {
+        "url": "http://10.203.208.133:4200/assets/images/sample.pdf",
+        "icon": "file-text-outline",
+		"type": "application/pdf"
+      }
+    ]
+  },
+  {
+    "quest": "image",
+	"type": "file",
+    "text": "This is a sample image",
+    "file": [
+      {
+        "url": "http://10.203.208.133:4200/assets/images/sampleimg.jpg",
+        "type": "image/jpeg"
+      }
+    ]
+  }
+]

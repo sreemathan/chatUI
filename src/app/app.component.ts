@@ -1,6 +1,7 @@
 import { Component, Renderer2, ElementRef, ViewChild} from '@angular/core';
 import { ChatShowcaseService } from './chat-showcase.service';
-
+import {DataServiceService} from './data-service.service';
+import { Data } from './data';
 
 declare var $: any;
 
@@ -15,13 +16,21 @@ declare var $: any;
 export class AppComponent {
   
   messages: any[];
+  message: Data[];
   public show:boolean = true;
+	file:any;
   
-  constructor(protected chatShowcaseService: ChatShowcaseService, private renderer: Renderer2, private elem: ElementRef) {
+  constructor(protected chatShowcaseService: ChatShowcaseService, private renderer: Renderer2, private elem: ElementRef, private messageData: DataServiceService) {
     this.messages = this.chatShowcaseService.loadMessages();
 	console.log('onload',this.messages);
   }
-  
+  ngOnInit() {
+    this.messageData.getMessage().subscribe(
+      result => {
+        this.message = result;
+        console.log(this.message)      }
+    )
+  }
   ngAfterViewInit() {
 	  var nbIcon = this.elem.nativeElement.querySelector('nb-icon');
 	  var chatButton = this.elem.nativeElement.querySelector('input.with-button');
@@ -62,6 +71,8 @@ export class AppComponent {
 	
   sendMessage(event: any) {
 	$('.chatloader').show();
+	var result = this.message.find(res => res.quest===event.message.toLowerCase( ));
+	console.log("AfterFilter",result);
 	const files = !event.files ? [] : event.files.map((file) => {
       console.log('type',file.type);
 	  if(file.type == "image/jpeg") {
@@ -106,71 +117,24 @@ export class AppComponent {
       },
     });
 	
-	if(msg == "hello" || msg == "hi" || msg == "" ){
-	setTimeout(()=>{    
-      $('.chatloader').hide();
-	  this.messages.push({
-		  text: "How can i assist you?",
-		  date: new Date(),
-		  reply: false,
-		  type: 'text',
-		  files: files,
-		  user: {
-			name: 'Altran Assist'
-		  }
-		});
-	}, 2000);
-	
-		
-	} else if (msg == "what is this about" ||msg == "what" || msg == "about" ){
-	setTimeout(()=>{    
-      $('.chatloader').hide();
-	  this.messages.push({
-		  text: "This is a chatbot POC",
-		  date: new Date(),
-		  reply: false,
-		  type: 'text',
-		  files: files,
-		  user: {
-			name: 'Altran Assist'
-		  }
-		});
-	}, 2000);
-	
-		
-	} else if(msg == "image"){
+	if(result){
 		setTimeout(()=>{    
       $('.chatloader').hide();
 	  this.messages.push({
-		  text: "A sample image",
+		  text: result.text,
 		  date: new Date(),
 		  reply: false,
-		  type: 'file',
-		  files: [
-        {
-          url: 'http://10.203.208.133:4200/assets/images/sampleimg.jpg',
-          type: 'image/jpeg',
-        },
-      ],
+		  type: result.type,
+		  files: result.file,
 		  user: {
 			name: 'Altran Assist'
-		  }
+		  },
 		});
+		var hj = $("nb-chat-message").last().html();
+		console.log(hj);
 	}, 2000);
-	} else {
-		setTimeout(()=>{    
-      $('.chatloader').hide();
-	  this.messages.push({
-		  text: "Sorry couldn't recognize",
-		  date: new Date(),
-		  reply: false,
-		  type: 'text',
-		  files: files,
-		  user: {
-			name: 'Altran Assist'
-		  }
-		});
-	}, 2000);
+		
+		
 	}
 	
 	console.log('onload',this.messages);
