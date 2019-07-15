@@ -25,11 +25,7 @@ export class AppComponent {
 	console.log('onload',this.messages);
   }
   ngOnInit() {
-    this.messageData.getMessage().subscribe(
-      result => {
-        this.message = result;
-        console.log(this.message)      }
-    )
+    
   }
   ngAfterViewInit() {
 	  var nbIcon = this.elem.nativeElement.querySelector('nb-icon');
@@ -48,30 +44,64 @@ export class AppComponent {
 			nbIcon.classList.remove('animated', 'pulse','infinite');
 		  }
 	  });
-	  	  $( () => {
-    $( "#draggable" ).draggable();
-	$("body").on('click','a.ng-star-inserted', (event) => {
-		
-		var linkVal = event.currentTarget.href;
-		var ext = linkVal.substr( (linkVal.lastIndexOf('.') +1) );
-		console.log(ext);
-		if(ext == 'jpg' || ext == 'png'){
-			$("#openMedia").html('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Altran Assist</h5></div><div class="modal-body" style="text-align:center;"><img src="' + linkVal + '" style="width:40%"></div></div></div>');
-		}
-		if(ext == 'mp4'){
-			$("#openMedia").html('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Altran Assist</h5></div><div class="modal-body" style="text-align:center;"><video width="100%" height="450" controls><source src="' + linkVal + '" type="video/mp4"></video></div></div></div>');
-		}
-		if(ext == 'pdf'){
-			$("#openMedia").html('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Altran Assist</h5></div><div class="modal-body" style="text-align:center;"><iframe src="' + linkVal + '" width="100%" height="500px"></iframe></div></div></div>');
-		}
-		
+	$( () => {
+		$( "#draggable" ).draggable();
+		$("body").on('click','a.ng-star-inserted', (event) => {
+			
+			var linkVal = event.currentTarget.href;
+			var ext = linkVal.substr( (linkVal.lastIndexOf('.') +1) );
+			console.log(ext);
+			if(ext == 'jpg' || ext == 'png'){
+				$("#openMedia").html('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Altran Assist</h5></div><div class="modal-body" style="text-align:center;"><img src="' + linkVal + '" style="width:40%"></div></div></div>');
+			}
+			if(ext == 'mp4'){
+				$("#openMedia").html('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Altran Assist</h5></div><div class="modal-body" style="text-align:center;"><video width="100%" height="450" controls autoplay><source src="' + linkVal + '" type="video/mp4"></video></div></div></div>');
+			}
+			if(ext == 'pdf'){
+				$("#openMedia").html('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Altran Assist</h5></div><div class="modal-body" style="text-align:center;"><iframe src="' + linkVal + '" width="100%" height="500px"></iframe></div></div></div>');
+			}
+			
+		});
 	});
-  } );
 	} 
 	
   sendMessage(event: any) {
+	 var datas = {
+	"format": false,
+	"username": "saudawar",
+	"sendertext": {
+		"sendertext": event.message
+	}
+}; 
+
+
+	this.messageData.getMessage().subscribe(
+      result => {
+		  console.log(result);
+		  
+		  result['responses'].forEach((value) => {
+			  if(value.title == undefined){value.title = ""}
+	  $('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted">' + value.content + '<br><a href="http://130.61.95.1:5001/chat/' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>').insertBefore('.chatloader');
+	$('.chatloader').hide();
+	  
+		  });
+		  /* result['responses'].forEach((value) => {
+		this.messages.push({
+		  text: value.content,
+		  date: new Date(),
+		  reply: false,
+		  type: 'file',
+		  files: value.url,
+		  user: {
+			name: 'Altran Assist'
+		  },
+		});
+	}, 2000); */
+	        }
+    ) 
+	
 	$('.chatloader').show();
-	var result = this.message.find(res => res.quest===event.message.toLowerCase( ));
+	var result = this.message;
 	console.log("AfterFilter",result);
 	const files = !event.files ? [] : event.files.map((file) => {
       console.log('type',file.type);
@@ -117,25 +147,7 @@ export class AppComponent {
       },
     });
 	
-	if(result){
-		setTimeout(()=>{    
-      $('.chatloader').hide();
-	  this.messages.push({
-		  text: result.text,
-		  date: new Date(),
-		  reply: false,
-		  type: result.type,
-		  files: result.file,
-		  user: {
-			name: 'Altran Assist'
-		  },
-		});
-		var hj = $("nb-chat-message").last().html();
-		console.log(hj);
-	}, 2000);
-		
-		
-	}
+	
 	
 	console.log('onload',this.messages);
     
