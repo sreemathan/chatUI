@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Data } from './data';
 import { Observable,throwError  } from "rxjs";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 
 
 @Injectable()
@@ -11,7 +11,12 @@ export class DataServiceService {
   constructor(private http: HttpClient) { }
 
 getMessage(datas): Observable<Data[]> {
-  return this.http.get<Data[]>(this.postUrl,datas);
+  let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+     httpHeaders = httpHeaders.set('Access-Control-Allow-Origin', '*');
+	let options = {
+     headers: httpHeaders
+	};  
+  return this.http.get<Data[]>(this.postUrl,datas,options);
   }
 
 
