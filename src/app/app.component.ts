@@ -75,7 +75,7 @@ export class AppComponent {
 }; 
 
 
-	this.messageData.getMessage().subscribe(
+	this.messageData.getMessage(datas).subscribe(
       result => {
 		  console.log(result);
 		  

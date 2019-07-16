@@ -7,11 +7,11 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 @Injectable()
 export class DataServiceService {
  public postsData: Data[];
-  postUrl: string = "./assets/json/file.json";
+  postUrl: string = "http://130.61.95.1:5001/chat/query";
   constructor(private http: HttpClient) { }
 
-getMessage(): Observable<Data[]> {
-  return this.http.get<Data[]>(this.postUrl);
+getMessage(datas): Observable<Data[]> {
+  return this.http.get<Data[]>(this.postUrl,datas);
   }
 
 
