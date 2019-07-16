@@ -73,18 +73,20 @@ export class AppComponent {
 		"sendertext": event.message
 	}
 }; 
-
-
+  var getD = $('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"></nb-chat-message>');
 	this.messageData.getMessage(datas).subscribe(
       result => {
 		  console.log(result);
 		  
 		  result['responses'].forEach((value) => {
 			  if(value.title == undefined){value.title = ""}
-	  $('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted">' + value.content + '<br><a href="http://130.61.95.1:5001/' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>').insertBefore('.chatloader');
+			  
+	   getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted">' + value.content + '<br><a href="http://130.61.95.1:5001/chat/' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>');
+	  
 	$('.chatloader').hide();
 	  
 		  });
+		  $(getD.html()).insertBefore('.chatloader');
 		  /* result['responses'].forEach((value) => {
 		this.messages.push({
 		  text: value.content,
@@ -135,17 +137,7 @@ export class AppComponent {
 	  }
     });
 	const msg = event.message.toLowerCase( );
-    this.messages.push({
-      text: msg,
-      date: new Date(),
-      reply: true,
-      type: files.length ? 'file' : 'text',
-      files: files,
-      user: {
-        name: 'mathan',
-        avatar: 'https://cresscap.com/wp-content/uploads/bfi_thumb/dummy-profile-pic-353fq072wibz1xp0b9j75s.png',
-      },
-    });
+  $('<nb-chat-message class="ng-tns-c3-1 ng-trigger ng-trigger-flyInOut reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted">' + msg + '</p></nb-chat-message-text></div></nb-chat-message>').insertBefore('.chatloader');
 	
 	
 	
