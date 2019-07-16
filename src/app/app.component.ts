@@ -46,6 +46,16 @@ export class AppComponent {
 	  });
 	$( () => {
 		$( "#draggable" ).draggable();
+    $("body").on('click','.readMoreClick', (event) => {
+			var currentHeight = event.currentTarget.previousElementSibling.style.height;
+			if(currentHeight == ""){
+				event.currentTarget.previousElementSibling.style.height = "auto";
+				event.currentTarget.innerText = "Read Less";
+			} else {
+				event.currentTarget.previousElementSibling.style.height = "";
+				event.currentTarget.innerText = "Read More";
+			}
+		});
 		$("body").on('click','a.ng-star-inserted', (event) => {
 			
 			var linkVal = event.currentTarget.href;
@@ -80,8 +90,10 @@ export class AppComponent {
 		  
 		  result['responses'].forEach((value) => {
 			  if(value.title == undefined){value.title = ""}
-			  
-	   getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted">' + value.content + '<br><a href="http://130.61.95.1:5001/chat/' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>');
+			  var words = $.trim(value.content).split(" ");
+			  var countedVal = "";
+				if(words.length > 15 ){ countedVal = "Read More"}
+	   getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted"><span class="readMore">' + value.content + '</span> <span class="readMoreClick">' + countedVal + '</span><br><a href="http://130.61.95.1:5001' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>');
 	  
 	$('.chatloader').hide();
 	  
