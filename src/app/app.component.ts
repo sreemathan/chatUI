@@ -48,11 +48,11 @@ export class AppComponent {
 		$( "#draggable" ).draggable();
     $("body").on('click','.readMoreClick', (event) => {
 			var currentHeight = event.currentTarget.previousElementSibling.style.height;
-			if(currentHeight == ""){
+			if(currentHeight == "59px"){
 				event.currentTarget.previousElementSibling.style.height = "auto";
 				event.currentTarget.innerText = "Read Less";
 			} else {
-				event.currentTarget.previousElementSibling.style.height = "";
+				event.currentTarget.previousElementSibling.style.height = "59px";
 				event.currentTarget.innerText = "Read More";
 			}
 		});
@@ -91,9 +91,9 @@ export class AppComponent {
 		  result['responses'].forEach((value) => {
 			  if(value.title == undefined){value.title = ""}
 			  var words = $.trim(value.content).split(" ");
-			  var countedVal = "";
-				if(words.length > 15 ){ countedVal = "Read More"}
-	   getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted"><a href="http://130.61.95.1:5001' + value.url + '" target="_blank">' + value.title + '</a><span class="readMore">' + value.content + '</span> <span class="readMoreClick">' + countedVal + '</span></p></nb-chat-message-text></div></nb-chat-message>');
+			  var countedVal, heightVal = "";
+				if(words.length > 15 ){ countedVal = "Read More"; heightVal= "59px"; } else { countedVal = ""; heightVal= "auto"; }
+	  getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted"><span class="readMore" style="height:' + heightVal + '">' + value.content + '</span> <span class="readMoreClick">' + countedVal + '</span><br><a href="http://130.61.95.1:5001' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>');
 	  
 	$('.chatloader').hide();
 	  
