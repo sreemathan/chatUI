@@ -93,7 +93,7 @@ export class AppComponent {
 			  var words = $.trim(value.content).split(" ");
 			  var countedVal = "";
 				if(words.length > 15 ){ countedVal = "Read More"}
-	   getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted"><span class="readMore">' + value.content + '</span> <span class="readMoreClick">' + countedVal + '</span><br><a href="http://130.61.95.1:5001' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>');
+	   getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted"><a href="http://130.61.95.1:5001' + value.url + '" target="_blank">' + value.title + '</a><span class="readMore">' + value.content + '</span> <span class="readMoreClick">' + countedVal + '</span></p></nb-chat-message-text></div></nb-chat-message>');
 	  
 	$('.chatloader').hide();
 	  

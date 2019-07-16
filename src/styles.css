@@ -119,3 +119,12 @@ background-color: #007EAF;
 .modal-content {
     border-radius: 8px;
 }
+.readMore{
+	height:59px;
+	display:inline-block;
+	overflow:hidden;
+}
+span.readMoreClick {
+    text-decoration: underline;
+    color: #36F;
+}
