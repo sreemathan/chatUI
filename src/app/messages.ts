@@ -1,6 +1,6 @@
 export const messages = [
   {
-    text: 'Meet Altran Assist',
+    text: 'Hi! This is altran assistant.',
     reply: false,
     date: new Date(),
     user: {
@@ -8,20 +8,12 @@ export const messages = [
     },
   },
   {
-    text: 'This should be a very long message so that we can test how it fit into the screen.',
-    reply: true,
+    text: 'How can I help you today?',
+    reply: false,
     date: new Date(),
     user: {
       name: 'John Doe',
       avatar: 'https://cresscap.com/wp-content/uploads/bfi_thumb/dummy-profile-pic-353fq072wibz1xp0b9j75s.png',
-    },
-  },
-  {
-    text: 'a conversational AI chatbot',
-    reply: false,
-    date: new Date(),
-    user: {
-      name: 'Altran Assist'
     },
   }
 ];
