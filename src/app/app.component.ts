@@ -81,7 +81,7 @@ export class AppComponent {
 		  
 		  result['responses'].forEach((value) => {
 			  if(value.title == undefined){value.title = ""}
-	  $('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted">' + value.content + '<br><a href="http://130.61.95.1:5001/chat/' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>').insertBefore('.chatloader');
+	  $('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted">' + value.content + '<br><a href="http://130.61.95.1:5001/' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>').insertBefore('.chatloader');
 	$('.chatloader').hide();
 	  
 		  });
