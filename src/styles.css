@@ -1,8 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-.message:hover {
-    transform: scale(1.03);
-}
 .nb-theme-default nb-chat.ng-star-inserted {
     height: 28.5rem !important;
 }
