@@ -92,8 +92,10 @@ export class AppComponent {
 			  if(value.title == undefined){value.title = ""}
 			  var words = $.trim(value.content).split(" ");
 			  var countedVal, heightVal = "";
+        var contentVal = value.content;
+			  var sliced = contentVal.slice(0, 500); 
 				if(words.length > 15 ){ countedVal = "Read More"; heightVal= "59px"; } else { countedVal = ""; heightVal= "auto"; }
-	  getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted"><span class="readMore" style="height:' + heightVal + '">' + value.content + '</span> <span class="readMoreClick">' + countedVal + '</span><br><a href="http://130.61.95.1:5001' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>');
+	  getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted"><span class="readMore" style="height:' + heightVal + '">' + sliced + '</span> <span class="readMoreClick">' + countedVal + '</span><br><a href="http://130.61.95.1:5001' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>');
 	  
 	$('.chatloader').hide();
 	  
