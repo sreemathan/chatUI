@@ -1,7 +1,8 @@
-import { Component, Renderer2, ElementRef, ViewChild} from '@angular/core';
+import { Component, Renderer2, ElementRef, HostListener} from '@angular/core';
 import { ChatShowcaseService } from './chat-showcase.service';
 import {DataServiceService} from './data-service.service';
 import { Data } from './data';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 declare var $: any;
 
@@ -22,105 +23,97 @@ export class AppComponent {
   
   constructor(protected chatShowcaseService: ChatShowcaseService, private renderer: Renderer2, private elem: ElementRef, private messageData: DataServiceService) {
     this.messages = this.chatShowcaseService.loadMessages();
-	console.log('onload',this.messages);
   }
-  ngOnInit() {
-    
+  @HostListener('click', ['$event']) onClick(e) {
+	  if(e.target.hasAttribute("send")){ 
+		  let emojiElement = this.elem.nativeElement.querySelector('emoji-mart'); 
+		  this.renderer.removeClass(emojiElement, 'opened'); 
+	  }
+	  if (e.target.offsetParent.classList.contains('chatButton')) {
+		  let emojiElement = this.elem.nativeElement.querySelector('emoji-mart'); this.renderer.removeClass(emojiElement, 'opened');
+	  }
+	  
+	  if (e.target.classList.contains('emojiClick')) {
+		let emojiElement = this.elem.nativeElement.querySelector('emoji-mart');
+		let classes: DOMTokenList = emojiElement.classList;
+		let classCond = classes.contains('opened');
+		this.renderer[classCond ? 'removeClass' : 'addClass'](emojiElement, 'opened');
+		
+	  }
+	  if (e.target.classList.contains('readMoreClick')) {
+		let currentHeight = e.target.previousElementSibling.style.height;
+			if(currentHeight == "59px"){
+				e.target.previousElementSibling.style.height = "auto";
+				e.target.innerText = "Read Less";
+			} else {
+				e.target.previousElementSibling.style.height = "59px";
+				e.target.innerText = "Read More";
+			}
+	  }
+	  if (e.target.classList.contains('a.ng-star-inserted')) {
+	  }
   }
   ngAfterViewInit() {
-	  var nbIcon = this.elem.nativeElement.querySelector('nb-icon');
-	  var chatButton = this.elem.nativeElement.querySelector('input.with-button');
+	  var chatButton = this.elem.nativeElement.querySelector('nb-chat-form .message-row input');
 	  var chatBody = this.elem.nativeElement.querySelector('.messages');
-	  nbIcon.insertAdjacentHTML('beforeend', '<i class="fa fa-microphone" aria-hidden="true"></i>');
-	  chatBody.insertAdjacentHTML('beforeend', '<div class="chatloader"><img src="http://10.203.208.133:4200/assets/gif/loader.gif" class="align-center"></div>');
+	  var chatform = this.elem.nativeElement.querySelector('nb-chat-form .message-row');
 	  
+	  chatform.insertAdjacentHTML('afterbegin','<i class="fa fa-smile-o emojiClick" aria-hidden="true"></i>');
+	  chatBody.insertAdjacentHTML('beforeend', '<div class="chatloader"><img src="http://10.203.208.133:4200/assets/gif/loader.gif" class="align-center"></div>');
+	  this.renderer.setAttribute(chatButton, 'send', "" );
 	  this.renderer.listen(chatButton, 'keyup', (e) => {
 		  if(e.target.value == ""){
-			this.renderer.removeClass(nbIcon, 'toggleIcon');
-			nbIcon.classList.add('animated', 'pulse','infinite');
 		  } else {
 			
-			this.renderer.addClass(nbIcon, 'toggleIcon');
-			nbIcon.classList.remove('animated', 'pulse','infinite');
+			this.renderer.setAttribute(chatButton, 'send', e.target.value );
 		  }
 	  });
-	$( () => {
-		$( "#draggable" ).draggable();
-    $("body").on('click','.readMoreClick', (event) => {
-			var currentHeight = event.currentTarget.previousElementSibling.style.height;
-			if(currentHeight == "59px"){
-				event.currentTarget.previousElementSibling.style.height = "auto";
-				event.currentTarget.innerText = "Read Less";
-			} else {
-				event.currentTarget.previousElementSibling.style.height = "59px";
-				event.currentTarget.innerText = "Read More";
-			}
-		});
-		$("body").on('click','a.ng-star-inserted', (event) => {
-			
-			var linkVal = event.currentTarget.href;
-			var ext = linkVal.substr( (linkVal.lastIndexOf('.') +1) );
-			console.log(ext);
-			if(ext == 'jpg' || ext == 'png'){
-				$("#openMedia").html('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Altran Assist</h5></div><div class="modal-body" style="text-align:center;"><img src="' + linkVal + '" style="width:40%"></div></div></div>');
-			}
-			if(ext == 'mp4'){
-				$("#openMedia").html('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Altran Assist</h5></div><div class="modal-body" style="text-align:center;"><video width="100%" height="450" controls autoplay><source src="' + linkVal + '" type="video/mp4"></video></div></div></div>');
-			}
-			if(ext == 'pdf'){
-				$("#openMedia").html('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Altran Assist</h5></div><div class="modal-body" style="text-align:center;"><iframe src="' + linkVal + '" width="100%" height="500px"></iframe></div></div></div>');
-			}
-			
-		});
+	  
+	$(() => {
+		$( "#draggable" ).draggable(
+			{ handle: ".header" }
+		);
 	});
 	} 
-	
+	addEmoji(ev){
+		  let prevValue = this.elem.nativeElement.querySelector('nb-chat-form .message-row input').getAttribute('send');
+		  this.renderer.setProperty(this.elem.nativeElement.querySelector('nb-chat-form .message-row input'), 'value', prevValue + '' + ev.emoji.native);
+		  this.renderer.setAttribute(this.elem.nativeElement.querySelector('nb-chat-form .message-row input'), 'send', prevValue + '' + ev.emoji.native);
+	}
   sendMessage(event: any) {
 	 var datas = {
 	"format": false,
 	"username": "saudawar",
 	"sendertext": {
-		"sendertext": event.message
+		"sendertext": event.target.attributes.send.value
 	}
 }; 
-  var getD = $('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"></nb-chat-message>');
+
+	var getD = $('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"></nb-chat-message>');
 	this.messageData.getMessage(datas).subscribe(
       result => {
-		  console.log(result);
 		  
 		  result['responses'].forEach((value) => {
 			  if(value.title == undefined){value.title = ""}
+			  
 			  var words = $.trim(value.content).split(" ");
 			  var countedVal, heightVal = "";
-        var contentVal = value.content;
+			  var contentVal = value.content;
 			  var sliced = contentVal.slice(0, 500); 
 				if(words.length > 15 ){ countedVal = "Read More"; heightVal= "59px"; } else { countedVal = ""; heightVal= "auto"; }
-	  getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted"><span class="readMore" style="height:' + heightVal + '">' + sliced + '</span> <span class="readMoreClick">' + countedVal + '</span><br><a href="http://130.61.95.1:5001' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>');
-	  
-	$('.chatloader').hide();
+				  getD.append('<nb-chat-message class="ng-tns-c3-2 ng-trigger ng-trigger-flyInOut not-reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted"><span class="readMore" style="height:' + heightVal + '">' + sliced + '</span> <span class="readMoreClick">' + countedVal + '</span><br><a href="http://130.61.95.1:5001' + value.url + '" target="_blank">' + value.title + '</a></p></nb-chat-message-text></div></nb-chat-message>');
+				  
+				$('.chatloader').hide();
 	  
 		  });
-		  $(getD.html()).insertBefore('.chatloader');
-		  /* result['responses'].forEach((value) => {
-		this.messages.push({
-		  text: value.content,
-		  date: new Date(),
-		  reply: false,
-		  type: 'file',
-		  files: value.url,
-		  user: {
-			name: 'Altran Assist'
-		  },
-		});
-	}, 2000); */
+		  
+		  this.elem.nativeElement.querySelector('.chatloader').insertAdjacentHTML('beforebegin', getD.html());
 	        }
     ) 
 	
 	$('.chatloader').show();
 	var result = this.message;
-	console.log("AfterFilter",result);
 	const files = !event.files ? [] : event.files.map((file) => {
-      console.log('type',file.type);
 	  if(file.type == "image/jpeg") {
 	  return {
         url: 'http://10.203.208.133:4200/assets/images/sampleimg.jpg',
@@ -150,12 +143,12 @@ export class AppComponent {
       };
 	  }
     });
-	const msg = event.message.toLowerCase( );
-  $('<nb-chat-message class="ng-tns-c3-1 ng-trigger ng-trigger-flyInOut reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted">' + msg + '</p></nb-chat-message-text></div></nb-chat-message>').insertBefore('.chatloader');
+	const msg = event.target.attributes.send.value;
 	
-	
-	
-	console.log('onload',this.messages);
+	$('<nb-chat-message class="ng-tns-c3-1 ng-trigger ng-trigger-flyInOut reply ng-star-inserted"><div class="message"><nb-chat-message-text><p class="text ng-star-inserted">' + msg + '</p></nb-chat-message-text></div></nb-chat-message>').insertBefore('.chatloader');
+	this.renderer.setProperty(this.elem.nativeElement.querySelector('nb-chat-form .message-row input'), 'value', "");
+	this.renderer.setAttribute(this.elem.nativeElement.querySelector('nb-chat-form .message-row input'), 'send', "");
+	this.renderer.removeClass(this.elem.nativeElement.querySelector('emoji-mart'), 'opened');
     
   }
 }

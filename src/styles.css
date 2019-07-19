@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 .nb-theme-default nb-chat.ng-star-inserted {
     height: 28.5rem !important;
 }
@@ -47,9 +48,8 @@ nb-chat .header {
     overflow-y: hidden;
     transition: ease-in-out 400ms max-height;
 }
-
-.box.opened {
-    max-height: 100%;
+.opened {
+    max-height: 100% !important;
     transition: ease-in-out 600ms max-height;
 }
 .chatButton:focus i {
@@ -64,7 +64,12 @@ nb-chat .header {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
-
+i.fa.fa-smile-o {
+    font-size: 23px;
+    padding: 9px;
+    cursor: pointer;
+	padding-left: 0;
+}
 .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
 	padding: 0px !important;
 }
@@ -117,11 +122,25 @@ background-color: #007EAF;
     border-radius: 8px;
 }
 .readMore{
-	height:59px;
+	height:auto;
 	display:inline-block;
 	overflow:hidden;
+	font-size: 11px;
 }
 span.readMoreClick {
     text-decoration: underline;
     color: #36F;
+}
+.emoji-mart-scroll{
+	height:199px !important;
+}
+emoji-mart.emoji-mart {
+    position: relative;
+    float: right;
+    top: 31%;
+	border: none;
+    left: -1%;
+	max-height: 0px;
+    overflow-y: hidden;
+    transition: ease-in-out 400ms max-height;
 }

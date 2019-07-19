@@ -7,6 +7,7 @@ import { NbThemeModule, NbLayoutModule, NbChatModule } from '@nebular/theme';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { DataServiceService } from './data-service.service';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DataServiceService } from './data-service.service';
 	NbChatModule,
 	NbLayoutModule,
 	NbEvaIconsModule,
+  PickerModule
 	
   ],
   providers: [DataServiceService],
