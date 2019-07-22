@@ -56,8 +56,9 @@ nb-chat .header {
   animation: rotate 1s ease-in-out 0s;
 }
 .nb-theme-default [nbInput].shape-rectangle {
-    margin-right: 2%;
-	font-weight: 100 !important;
+    font-weight: 100 !important;
+    padding: 5px !important;
+    height: 46px;
 }
 
 @keyframes rotate {
