@@ -50,7 +50,12 @@ export class AppComponent {
 				e.target.innerText = "Read More";
 			}
 	  }
-	  if (e.target.classList.contains('a.ng-star-inserted')) {
+	  if (e.target.classList.contains('mic') || e.target.classList.contains('pulse-anim')) {
+		  let pulseElement = this.elem.nativeElement.querySelector('.pulse-ring');
+		  let pulseClasses: DOMTokenList = pulseElement.classList;
+		  let pulseclassCond = pulseClasses.contains('pulse-anim'); 
+		  this.renderer[pulseclassCond ? 'removeClass' : 'addClass'](pulseElement, 'pulse-anim'); 
+		  
 	  }
   }
   ngAfterViewInit() {
@@ -59,6 +64,7 @@ export class AppComponent {
 	  var chatform = this.elem.nativeElement.querySelector('nb-chat-form .message-row');
 	  
 	  chatform.insertAdjacentHTML('afterbegin','<i class="fa fa-smile-o emojiClick" aria-hidden="true"></i>');
+    chatform.insertAdjacentHTML('beforeend','<button id="speech" class="btn mic"><i class="fa fa-microphone mic" aria-hidden="true"></i><div class="pulse-ring"></div></button>');
 	  chatBody.insertAdjacentHTML('beforeend', '<div class="chatloader"><img src="http://10.203.208.133:4200/assets/gif/loader.gif" class="align-center"></div>');
 	  this.renderer.setAttribute(chatButton, 'send', "" );
 	  this.renderer.listen(chatButton, 'keyup', (e) => {

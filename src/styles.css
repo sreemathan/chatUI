@@ -144,3 +144,66 @@ emoji-mart.emoji-mart {
     overflow-y: hidden;
     transition: ease-in-out 400ms max-height;
 }
+
+button#speech:focus {
+    border: none;
+    box-shadow: 0 0 0 0;
+}
+i.fa.fa-microphone.mic {
+    color: black;
+    font-size: 21px;
+    margin-left: 15px;
+}
+#speech.btn {
+	border: none;
+  padding: 0;
+  border-radius: 100%;
+  width: 30px;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  background: white;
+	position: relative;
+  display: inline-block;
+    line-height: 50px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+}
+
+.pulse-ring {
+    content: '';
+    width: 30px;
+    height: 30px;
+    border: 2px solid #a01212;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 12px;
+    -webkit-animation: pulsate infinite 2s;
+    animation: pulsate infinite 2s;
+    right: -25.2%;
+	display:none;
+}
+.pulse-anim {
+    display: block;
+}
+
+
+@-webkit-keyframes pulsate {
+  0% {
+    -webkit-transform: scale(1, 1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+    opacity: 0;
+  }
+}
